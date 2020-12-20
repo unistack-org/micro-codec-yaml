@@ -6,7 +6,6 @@ import (
 	"io/ioutil"
 
 	"github.com/ghodss/yaml"
-
 	"github.com/unistack-org/micro/v3/codec"
 )
 
@@ -38,11 +37,11 @@ func (c *yamlCodec) Unmarshal(b []byte, v interface{}) error {
 	return yaml.Unmarshal(b, v)
 }
 
-func (c *yamlCodec) ReadHeader(conn io.ReadWriter, m *codec.Message, t codec.MessageType) error {
+func (c *yamlCodec) ReadHeader(conn io.Reader, m *codec.Message, t codec.MessageType) error {
 	return nil
 }
 
-func (c *yamlCodec) ReadBody(conn io.ReadWriter, b interface{}) error {
+func (c *yamlCodec) ReadBody(conn io.Reader, b interface{}) error {
 	switch m := b.(type) {
 	case nil:
 		return nil
@@ -63,7 +62,7 @@ func (c *yamlCodec) ReadBody(conn io.ReadWriter, b interface{}) error {
 	return yaml.Unmarshal(buf, b)
 }
 
-func (c *yamlCodec) Write(conn io.ReadWriter, m *codec.Message, b interface{}) error {
+func (c *yamlCodec) Write(conn io.Writer, m *codec.Message, b interface{}) error {
 	switch m := b.(type) {
 	case nil:
 		return nil
