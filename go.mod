@@ -4,5 +4,5 @@ go 1.15
 
 require (
 	github.com/ghodss/yaml v1.0.0
-	github.com/unistack-org/micro/v3 v3.3.9
+	github.com/unistack-org/micro/v3 v3.3.10
 )
