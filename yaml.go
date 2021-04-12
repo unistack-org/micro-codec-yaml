@@ -57,6 +57,9 @@ func (c *yamlCodec) ReadBody(conn io.Reader, b interface{}) error {
 	buf, err := ioutil.ReadAll(conn)
 	if err != nil {
 		return err
+	} else if buf == nil {
+		// not needed but similar changes in all codecs
+		return nil
 	}
 
 	return yaml.Unmarshal(buf, b)
