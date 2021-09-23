@@ -9,38 +9,53 @@ import (
 	rutil "github.com/unistack-org/micro/v3/util/reflect"
 )
 
-type yamlCodec struct{}
+type yamlCodec struct {
+	opts codec.Options
+}
+
+var _ codec.Codec = &yamlCodec{}
 
 const (
 	flattenTag = "flatten"
 )
 
-func (c *yamlCodec) Marshal(v interface{}) ([]byte, error) {
-	switch m := v.(type) {
-	case nil:
+func (c *yamlCodec) Marshal(v interface{}, opts ...codec.Option) ([]byte, error) {
+	if v == nil {
 		return nil, nil
-	case *codec.Frame:
+	}
+
+	options := c.opts
+	for _, o := range opts {
+		o(&options)
+	}
+	if nv, nerr := rutil.StructFieldByTag(v, options.TagName, flattenTag); nerr == nil {
+		v = nv
+	}
+
+	if m, ok := v.(*codec.Frame); ok {
 		return m.Data, nil
 	}
 
-	if nv, nerr := rutil.StructFieldByTag(v, codec.DefaultTagName, flattenTag); nerr == nil {
-		v = nv
-	}
 	return yaml.Marshal(v)
 }
 
-func (c *yamlCodec) Unmarshal(b []byte, v interface{}) error {
+func (c *yamlCodec) Unmarshal(b []byte, v interface{}, opts ...codec.Option) error {
 	if len(b) == 0 || v == nil {
 		return nil
+	}
+
+	options := c.opts
+	for _, o := range opts {
+		o(&options)
+	}
+
+	if nv, nerr := rutil.StructFieldByTag(v, options.TagName, flattenTag); nerr == nil {
+		v = nv
 	}
 
 	if m, ok := v.(*codec.Frame); ok {
 		m.Data = b
 		return nil
-	}
-
-	if nv, nerr := rutil.StructFieldByTag(v, codec.DefaultTagName, flattenTag); nerr == nil {
-		v = nv
 	}
 
 	return yaml.Unmarshal(b, v)
@@ -85,6 +100,6 @@ func (c *yamlCodec) String() string {
 	return "yaml"
 }
 
-func NewCodec() codec.Codec {
-	return &yamlCodec{}
+func NewCodec(opts ...codec.Option) *yamlCodec {
+	return &yamlCodec{opts: codec.NewOptions(opts...)}
 }
