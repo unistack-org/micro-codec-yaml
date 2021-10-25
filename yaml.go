@@ -1,5 +1,5 @@
 // Package yaml provides a yaml codec
-package yaml
+package yaml // import "go.unistack.org/micro-codec-yaml/v3"
 
 import (
 	"io"
