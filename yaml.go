@@ -4,7 +4,7 @@ package yaml // import "go.unistack.org/micro-codec-yaml/v3"
 import (
 	"io"
 
-	"github.com/ghodss/yaml"
+	"sigs.k8s.io/yaml"
 	"go.unistack.org/micro/v3/codec"
 	rutil "go.unistack.org/micro/v3/util/reflect"
 )
