@@ -1,12 +1,12 @@
 // Package yaml provides a yaml codec
-package yaml // import "go.unistack.org/micro-codec-yaml/v3"
+package yaml // import "go.unistack.org/micro-codec-yaml/v4"
 
 import (
 	"io"
 
-	pb "go.unistack.org/micro-proto/v3/codec"
-	"go.unistack.org/micro/v3/codec"
-	rutil "go.unistack.org/micro/v3/util/reflect"
+	pb "go.unistack.org/micro-proto/v4/codec"
+	"go.unistack.org/micro/v4/codec"
+	rutil "go.unistack.org/micro/v4/util/reflect"
 	"sigs.k8s.io/yaml"
 )
 
