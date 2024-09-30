@@ -36,3 +36,19 @@ func TestFrameFlatten(t *testing.T) {
 		t.Fatalf("bytes not equal %s != %s", buf, `test`)
 	}
 }
+
+func TestNativeYamlTags(t *testing.T) {
+	s := &struct {
+		One string `yaml:"first"`
+	}{
+		One: "",
+	}
+
+	err := NewCodec().Unmarshal([]byte(`first: "val"`), s)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if s.One != "val" {
+		t.Fatalf("XXX %#+v\n", s)
+	}
+}
