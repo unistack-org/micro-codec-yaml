@@ -28,7 +28,7 @@ func TestFrameFlatten(t *testing.T) {
 		Name: &codec.Frame{Data: []byte("test")},
 	}
 
-	buf, err := NewCodec().Marshal(s)
+	buf, err := NewCodec(codec.Flatten(true)).Marshal(s)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -37,14 +37,18 @@ func TestFrameFlatten(t *testing.T) {
 	}
 }
 
-func TestReadBody(t *testing.T) {
+func TestNativeYamlTags(t *testing.T) {
 	s := &struct {
-		Name string
-	}{}
-	c := NewCodec()
-	b := bytes.NewReader(nil)
-	err := c.ReadBody(b, s)
+		One string `yaml:"first"`
+	}{
+		One: "",
+	}
+
+	err := NewCodec().Unmarshal([]byte(`first: "val"`), s)
 	if err != nil {
 		t.Fatal(err)
+	}
+	if s.One != "val" {
+		t.Fatalf("XXX %#+v\n", s)
 	}
 }
