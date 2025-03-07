@@ -1,10 +1,10 @@
 module go.unistack.org/micro-codec-yaml/v4
 
-go 1.23
+go 1.22
 
 require (
 	go.unistack.org/micro-proto/v4 v4.1.0
-	go.unistack.org/micro/v4 v4.1.2
+	go.unistack.org/micro/v4 v4.1.3
 	gopkg.in/yaml.v3 v3.0.1
 )
 
