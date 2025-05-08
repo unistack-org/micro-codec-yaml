@@ -2,10 +2,10 @@
 package yaml
 
 import (
+	yaml "github.com/goccy/go-yaml"
 	pb "go.unistack.org/micro-proto/v4/codec"
 	"go.unistack.org/micro/v4/codec"
 	rutil "go.unistack.org/micro/v4/util/reflect"
-	yaml "gopkg.in/yaml.v3"
 )
 
 type yamlCodec struct {
