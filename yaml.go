@@ -39,6 +39,8 @@ func (c *yamlCodec) Marshal(v interface{}, opts ...codec.Option) ([]byte, error)
 		return []byte(m), nil
 	case *codec.RawMessage:
 		return []byte(*m), nil
+	case yaml.RawMessage:
+		return []byte(m), nil
 	}
 
 	return yaml.Marshal(v)
@@ -72,6 +74,12 @@ func (c *yamlCodec) Unmarshal(b []byte, v interface{}, opts ...codec.Option) err
 		return nil
 	case codec.RawMessage:
 		copy(m, b)
+		return nil
+	case yaml.RawMessage:
+		copy(m, b)
+		return nil
+	case *yaml.RawMessage:
+		*m = append((*m)[0:0], b...)
 		return nil
 	}
 
