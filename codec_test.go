@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	yamlc "github.com/goccy/go-yaml"
-	"go.unistack.org/micro/v4/codec"
-	utime "go.unistack.org/micro/v4/util/time"
+	"go.unistack.org/micro/v5/codec"
+	utime "go.unistack.org/micro/v5/util/time"
 )
 
 func TestFrame(t *testing.T) {

@@ -1,11 +1,11 @@
-module go.unistack.org/micro-codec-yaml/v4
+module go.unistack.org/micro-codec-yaml/v5
 
 go 1.25
 
 require (
 	github.com/goccy/go-yaml v1.19.2
-	go.unistack.org/micro-proto/v4 v4.1.2
-	go.unistack.org/micro/v4 v4.1.32
+	go.unistack.org/micro-proto/v5 v4.1.2
+	go.unistack.org/micro/v5 v4.1.32
 )
 
 require (
