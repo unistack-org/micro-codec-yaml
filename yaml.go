@@ -31,8 +31,6 @@ func (c *yamlCodec) Marshal(v interface{}, opts ...codec.Option) ([]byte, error)
 	}
 
 	switch m := v.(type) {
-	case *codec.Frame:
-		return m.Data, nil
 	case *pb.Frame:
 		return m.Data, nil
 	case codec.RawMessage:
@@ -63,9 +61,6 @@ func (c *yamlCodec) Unmarshal(b []byte, v interface{}, opts ...codec.Option) err
 	}
 
 	switch m := v.(type) {
-	case *codec.Frame:
-		m.Data = b
-		return nil
 	case *pb.Frame:
 		m.Data = b
 		return nil
