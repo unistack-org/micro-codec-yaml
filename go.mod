@@ -5,7 +5,7 @@ go 1.26
 require (
 	github.com/goccy/go-yaml v1.19.2
 	go.unistack.org/micro-proto/v5 v5.0.0
-	go.unistack.org/micro/v5 v5.0.1
+	go.unistack.org/micro/v5 v5.0.4
 )
 
 require (
